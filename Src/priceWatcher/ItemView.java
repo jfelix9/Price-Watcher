@@ -76,7 +76,7 @@ public class ItemView extends JPanel {
         //isViewPageClicked( x, y);
         //g.drawImage(setIconImage(Image "hello"), x, y, this);
         //g.drawImage(getImage( "rabbit.jpg"), x, y, this);
-        y+= 10;
+        y+= 200;
        
      
         //g.drawString(getImage("image/rabbit.jpg"), x, y);

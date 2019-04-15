@@ -4,14 +4,13 @@ package priceWatcher;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Random;
@@ -30,28 +29,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-import javax.swing.RootPaneContainer;
-import javax.swing.SwingUtilities;
 import javax.swing.JToolBar;
-
-
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
- 
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
- 
-import java.net.URL;
- 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
 * A dialog for tracking the price of an item.
@@ -59,7 +39,7 @@ import java.awt.event.ActionListener;
 * @author Yoonsik Cheon
 */
 @SuppressWarnings("serial")
-public class Main extends JFrame {
+public class Main extends JFrame implements ActionListener {
 	Item item = new Item();
 	ConsoleUi ui = new ConsoleUi(item);
 	Random rand = new Random();
@@ -89,10 +69,9 @@ public class Main extends JFrame {
     static final private String PREVIOUS = "previous";
     static final private String UP = "up";
     static final private String NEXT = "next";
-    
  
-  /* public ToolBarDemo() {
-        super(new BorderLayout());
+    public void ToolBarDemo() {
+      //  super(new BorderLayout());
  
         //Create the toolbar.
         JToolBar toolBar = new JToolBar("Still draggable");
@@ -159,7 +138,7 @@ public class Main extends JFrame {
         return button;
     }
  
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed1(ActionEvent e) {
         String cmd = e.getActionCommand();
         String description = null;
  
@@ -180,9 +159,12 @@ public class Main extends JFrame {
         textArea.append(actionDescription + newline);
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
+ 
+    /**
+     * Create the GUI and show it.  For thread safety,
+     * this method should be invoked from the
+     * event dispatch thread
     
-    
-    */
     
     
     
@@ -352,7 +334,7 @@ public class Main extends JFrame {
 
 
     /** Default dimension of the dialog. */
-    private final static Dimension DEFAULT_SIZE = new Dimension(400, 300);
+    private final static Dimension DEFAULT_SIZE = new Dimension(800, 600);
 	private static final String AudioPlayer = null;
       
     /** Special panel to display the watched item. */
@@ -432,19 +414,27 @@ public class Main extends JFrame {
         setLayout(new BorderLayout());
         MenuLookDemo demo = new MenuLookDemo();
         JPanel control = makeControlPanel();
-        control.setBorder(BorderFactory.createEmptyBorder(10,16,0,16)); 
+        control.setBorder(BorderFactory.createEmptyBorder(20,26,10,26)); 
         add(control, BorderLayout.NORTH);
+        
+        add(new ToolBarDemo());
+        pack();
+        setVisible(true);
+        
+        //Display the window.
+        //frame.pack();
+        //frame.setVisible(true);
         JPanel board = new JPanel();
         control.add(demo.createMenuBar());
         board.setBorder(BorderFactory.createCompoundBorder(
-        		BorderFactory.createEmptyBorder(10,16,0,16),
+        		BorderFactory.createEmptyBorder(20,26,10,26),
         		BorderFactory.createLineBorder(Color.GRAY)));
         board.setLayout(new GridLayout(1,1));
         itemView = new ItemView();
         itemView.setClickListener(()-> {});
         board.add(itemView);
         add(board, BorderLayout.CENTER);
-        msgBar.setBorder(BorderFactory.createEmptyBorder(10,16,10,0));
+        msgBar.setBorder(BorderFactory.createEmptyBorder(20,26,20,10));
         add(msgBar, BorderLayout.SOUTH);
     }
       
@@ -485,5 +475,11 @@ public class Main extends JFrame {
     public static void main(String[] args) throws URISyntaxException {
         new Main();
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
